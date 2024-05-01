@@ -13,7 +13,7 @@ import json
 # 현재 날짜 가져오기
 current_date = datetime.now().strftime("%Y-%m-%d")
 folder_path = "paiks"
-filename = f"{folder_path}/menu-paiks_{current_date}.json"
+filename = f"{folder_path}/menupaiks_{current_date}.json"
 
 # 웹드라이브 설치
 options = ChromeOptions()
