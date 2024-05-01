@@ -8,9 +8,20 @@ current_date = datetime.now().strftime("%Y-%m-%d")
 folder_path = "gurunaru"
 filename = f"{folder_path}/menugurunaru_{current_date}.json"
 
-# 웹 페이지로부터 데이터 요청 및 수신
-response = requests.get("https://www.coffine.co.kr/front/menu/coffee_list.php#contents")
-soup = BeautifulSoup(response.text, "lxml")
+# 웹드라이브 설치
+options = ChromeOptions()
+service = ChromeService(executable_path=ChromeDriverManager().install())
+browser = webdriver.Chrome(service=service, options=options)
+browser.get("https://www.coffine.co.kr/front/menu/coffee_list.php#contents")
+
+# 페이지가 완전히 로드될 때까지 대기
+WebDriverWait(browser, 10).until(
+    EC.presence_of_element_located((By.CLASS_NAME, "pro_list"))
+)
+
+# 업데이트된 페이지 소스를 변수에 저장
+html_source_updated = browser.page_source
+soup = BeautifulSoup(html_source_updated, 'html.parser')
 
 # 데이터 추출
 coffee_data = []
