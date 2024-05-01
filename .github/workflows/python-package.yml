@@ -53,12 +53,12 @@ jobs:
       run : |
         git config --global user.email "gnlgk@gmail.com"
         git config --global user.name "gnlgk" 
-        git add dessert39/menu-dessert39_*.json
-        git add gurunaru/menu-gurunaru_*.json
-        git add hollys/menu-hollys_*.json
-        git add mammoth/menu-mammoth_*.json
-        git add paiks/menu-paiks_*.json
-        git add tomntom/menu-tomntom_*.json
+        git add dessert39/menudessert39_*.json
+        git add gurunaru/menugurunaru_*.json
+        git add hollys/menuhollys_*.json
+        git add mammoth/menumammoth_*.json
+        git add paiks/menupaiks_*.json
+        git add tomntom/menutomntom_*.json
         git commit -m "메뉴 수집 완료"
         
     - name: push
