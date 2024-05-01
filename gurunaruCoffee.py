@@ -12,10 +12,6 @@ filename = f"{folder_path}/menugurunaru_{current_date}.json"
 response = requests.get("https://www.coffine.co.kr/front/menu/coffee_list.php#contents")
 soup = BeautifulSoup(response.text, "lxml")
 
-# 업데이트된 페이지 소스를 변수에 저장
-html_source_updated = browser.page_source
-soup = BeautifulSoup(html_source_updated, 'html.parser')
-
 # 데이터 추출
 coffee_data = []
 tracks = soup.select("#contents > div > div > .pro_list > li")
