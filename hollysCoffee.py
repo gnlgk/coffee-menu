@@ -12,7 +12,8 @@ import json
 
 # 현재 날짜 가져오기
 current_date = datetime.now().strftime("%Y-%m-%d")
-filename = f"menu-hollys_{current_date}.json"
+folder_path = "hollys"
+filename = f"{folder_path}/menu-hollys_{current_date}.json"
 
 # 웹드라이브 설치
 options = ChromeOptions()
@@ -24,8 +25,6 @@ browser.get("https://www.hollys.co.kr/menu/espresso.do")
 WebDriverWait(browser, 10).until(
     EC.presence_of_element_located((By.CLASS_NAME, "menu_list01.mar_t_40"))
 )
-
-print(EC)
 
 html_source_updated = browser.page_source
 soup = BeautifulSoup(html_source_updated, 'html.parser')
