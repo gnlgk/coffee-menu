@@ -15,19 +15,15 @@ current_date = datetime.now().strftime("%Y-%m-%d")
 folder_path = "gurunaru"
 filename = f"{folder_path}/menugurunaru_{current_date}.json"
 
-# Chrome 서비스 설정
-service = ChromeService(ChromeDriverManager().install())
-
-# Chrome 옵션 설정
+# 웹드라이브 설치
 options = ChromeOptions()
-options.add_argument('--headless')
-
-# Chrome 시작
+service = ChromeService(executable_path=ChromeDriverManager().install())
 browser = webdriver.Chrome(service=service, options=options)
 browser.get("https://www.coffine.co.kr/front/menu/coffee_list.php#contents")
 
+# 페이지가 완전히 로드될 때까지 대기
 WebDriverWait(browser, 10).until(
-    EC.presence_of_all_elements_located((By.CLASS_NAME, "component_wrap"))
+    EC.presence_of_element_located((By.CLASS_NAME, "pro_list"))
 )
 
 # 업데이트된 페이지 소스를 변수에 저장
