@@ -47,4 +47,4 @@ with open(filename, 'w', encoding='utf-8') as f:
     json.dump(coffee_data, f, ensure_ascii=False, indent=4)
 
 # # 브라우저 종료
-# browser.quit()
+browser.quit()
