@@ -42,16 +42,18 @@ jobs:
       
     - name: run file
       run: |
-        python3 gurunaruCoffee.py
         python3 dessert39Coffee.py
+        python3 gurunaruCoffee.py
+        python3 hollysCoffee.py
         python3 mammothCoffee.py
       
     - name: commits
       run : |
         git config --global user.email "gnlgk@gmail.com"
-        git config --global user.name "gnlgk" 
-        git add gurunaru/menugurunaru_*.json
+        git config --global user.name "gnlgk"
         git add dessert39/menudessert39_*.json
+        git add gurunaru/menugurunaru_*.json
+        git add hollys/menuhollys_*.json
         git add mammoth/menumammoth_*.json
         git commit -m "메뉴 수집 완료"
         
