@@ -50,6 +50,8 @@ jobs:
         python3 tomntomCoffee.py
         python3 caffebeneCoffee.py
         python3 canbusCoffee.py
+        python3 theventiCoffee.py
+        python3 ediyaCoffee.py
       
     - name: commits
       run : |
@@ -63,6 +65,8 @@ jobs:
         git add tomntom/menutomntom_*.json
         git add caffebene/menucaffebene_*.json
         git add canbus/menucanbus_*.json
+        git add theventi/menutheventi_*.json
+        git add ediya/menuediya_*.json
         git commit -m "메뉴 수집 완료"
         
     - name: push
