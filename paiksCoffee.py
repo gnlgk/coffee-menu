@@ -17,8 +17,8 @@ filename = f"{folder_path}/menupaiks_{current_date}.json"
 
 # 웹드라이브 설치
 options = ChromeOptions()
-service = ChromeService(executable_path=ChromeDriverManager().install())
-browser = webdriver.Chrome(service=service, options=options)
+options.add_argument("--headless")
+browser = webdriver.Chrome(options=options)
 browser.get("https://paikdabang.com/menu/menu_coffee/")
 
 # 페이지가 완전히 로드될 때까지 대기
