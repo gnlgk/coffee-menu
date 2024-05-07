@@ -53,7 +53,7 @@ EDIYA_data = []
 tracks = soup.select("#menu_ul li")
 for track in tracks:
     name = track.select_one(".menu_tt > a > span").text.strip()
-    image_url = track.select_one("a > img").get('src').replace('/files', 'https://www.ediya.com/files')
+    image_url = track.select_one("a > img").get('src').replace('/images', 'https://www.ediya.com/files')
 
     EDIYA_data.append({
         "name": name,
