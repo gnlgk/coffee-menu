@@ -51,7 +51,6 @@ jobs:
         python3 caffebeneCoffee.py
         python3 canbusCoffee.py
         python3 theventiCoffee.py
-        python3 composeCoffee.py
         python3 ediyaCoffee.py
         
       
@@ -68,7 +67,6 @@ jobs:
         git add caffebene/menucaffebene_*.json
         git add canbus/menucanbus_*.json
         git add theventi/menutheventi_*.json
-        git add compose/menucomposecoffee_*.json
         git add ediya/menuediya_*.json
         git commit -m "메뉴 수집 완료"
         
