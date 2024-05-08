@@ -9,7 +9,7 @@ import os
 # 현재 날짜 가져오기
 current_date = datetime.now().strftime("%Y-%m-%d")
 folder_path = "composecoffee"
-filename = f"{folder_path}/menucomposecoffee_{current_date}.json"
+filename = f"{folder_path}/menucompose_{current_date}.json"
 
 # 폴더 경로가 없다면 생성
 if not os.path.exists(folder_path):
