@@ -52,8 +52,8 @@ jobs:
         python3 canbusCoffee.py
         python3 theventiCoffee.py
         python3 ediyaCoffee.py
+        python3 coffeebayCoffee.py
         
-      
     - name: commits
       run : |
         git config --global user.email "gnlgk@gmail.com"
@@ -68,6 +68,7 @@ jobs:
         git add canbus/menucanbus_*.json
         git add theventi/menutheventi_*.json
         git add ediya/menuediya_*.json
+        git add coffeebay/menucoffeebay_*.json
         git commit -m "메뉴 수집 완료"
         
     - name: push
