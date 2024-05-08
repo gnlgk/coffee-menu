@@ -28,7 +28,7 @@ options.add_argument("--headless")
 browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
 # 페이지 로드
-browser.get('https://www.ediya.com/contents/drink.html?chked_val=12,&skeyword=#blockcate')
+browser.get('https://www.ediya.com/contents/drink.html?chked_val=12,13,14,15,16,71,83,132,&skeyword=#blockcate')
 
 # '더보기' 버튼이 나타날 때까지 기다림 (최대 20초)
 while True:
