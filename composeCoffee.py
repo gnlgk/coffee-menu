@@ -47,7 +47,7 @@ for url in urls:
     tracks = soup.select(".itemBox")
     for track in tracks:
         name = track.select_one(".title").text.strip()  
-        image_url = track.select_one("rthumbnailimg").get('src').replace('/files', 'https://composecoffee.com/files') 
+        image_url = track.select_one(".rthumbnailimg").get('src').replace('/files', 'https://composecoffee.com/files') 
 
         theventi_data.append({
             "title": name,
