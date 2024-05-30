@@ -38,7 +38,7 @@ for track in tracks:
     imageURL = track.select_one("#pageWrap > ul > li > img").get('src').replace('/images', 'http://canbus.kr/images')
     coffee_data.append({
         "title": title,
-        "imageURL": image_url,
+        "imageURL": imageURL,
     })
 
 # 데이터를 JSON 파일로 저장
