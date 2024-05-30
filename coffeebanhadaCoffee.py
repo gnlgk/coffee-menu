@@ -51,12 +51,12 @@ soup = BeautifulSoup(html_source_updated, 'html.parser')
 coffeebanhada_data = []
 tracks = soup.select("#wrap > div.sub_content.menu_wrap > .menu_lst.m_menu_lst")
 for track in tracks:
-    name = track.select_one("#wrap > div.sub_content.menu_wrap > div > div > p").text.strip()
-    image_url = track.select_one("#wrap > div.sub_content.menu_wrap > div > div > div > img").get('src').replace('/data', 'https://coffeebanhada.com/data')
+    title = track.select_one("#wrap > div.sub_content.menu_wrap > div > div > p").text.strip()
+    imageURL = track.select_one("#wrap > div.sub_content.menu_wrap > div > div > div > img").get('src').replace('/data', 'https://coffeebanhada.com/data')
 
     coffeebanhada_data.append({
-        "p": name,
-        "img": image_url                                
+        "p": title,
+        "img": imageURL                                
     })
 
 # 데이터를 JSON 파일로 저장
