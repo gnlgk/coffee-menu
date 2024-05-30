@@ -35,7 +35,7 @@ tracks = soup.select("#pageWrap > ul > li")
 
 for track in tracks:
     title = track.select_one("#pageWrap > ul > li > p").text.strip()    
-    image_url = track.select_one("#pageWrap > ul > li > img").get('src').replace('/images', 'http://canbus.kr/images')
+    imageURL = track.select_one("#pageWrap > ul > li > img").get('src').replace('/images', 'http://canbus.kr/images')
     coffee_data.append({
         "title": title,
         "imageURL": image_url,
