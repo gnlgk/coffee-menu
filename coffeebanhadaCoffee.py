@@ -55,8 +55,8 @@ for track in tracks:
     imageURL = track.select_one("#wrap > div.sub_content.menu_wrap > div > div > div > img").get('src').replace('/data', 'https://coffeebanhada.com/data')
 
     coffeebanhada_data.append({
-        "p": title,
-        "img": imageURL                                
+        "title": title,
+        "imageURL": imageURL                                
     })
 
 # 데이터를 JSON 파일로 저장
