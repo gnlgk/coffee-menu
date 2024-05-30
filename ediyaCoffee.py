@@ -57,7 +57,7 @@ for track in tracks:
 
     EDIYA_data.append({
         "name": name,
-        "image_url": image_url
+        "imageURL": image_url
     })
 
 # 데이터를 JSON 파일로 저장
