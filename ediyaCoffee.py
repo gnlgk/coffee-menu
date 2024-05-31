@@ -56,7 +56,7 @@ for track in tracks:
     image_url = track.select_one("a > img").get('src').replace('/images', 'https://www.ediya.com/files')
 
     EDIYA_data.append({
-        "name": name,
+        "title": name,
         "imageURL": image_url
     })
 
