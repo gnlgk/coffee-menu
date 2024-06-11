@@ -17,14 +17,9 @@ filename = f"{folder_path}/menugurunaru_{current_date}.json"
 
 # 웹드라이브 설치
 options = ChromeOptions()
-options.add_argument("--headless")
-browser = webdriver.Chrome(options=options)
+service = ChromeService(executable_path=ChromeDriverManager().install())
+browser = webdriver.Chrome(service=service, options=options)
 browser.get("https://www.coffine.co.kr/front/menu/coffee_list.php#contents")
-
-# 페이지가 완전히 로드될 때까지 대기
-WebDriverWait(browser, 10).until(
-    EC.presence_of_element_located((By.CLASS_NAME, "pro_list"))
-)
 
 # 업데이트된 페이지 소스를 변수에 저장
 html_source_updated = browser.page_source
@@ -35,11 +30,33 @@ coffee_data = []
 tracks = soup.select("#contents > div > div > .pro_list > li")
 
 for track in tracks:
-    title = track.select_one("li > a > strong").text.strip()    
-    image_url = track.select_one("li > a > img.img").get('src').replace('/uploads', 'https://www.coffine.co.kr/uploads')
+    # 각 커피 항목의 링크(Anchor 태그)를 찾습니다.
+    coffee_link = track.select_one("a").get('href')
+    
+    # 상세 페이지로 이동하여 추가 데이터를 가져옵니다.
+    browser.get(f"https://www.coffine.co.kr/front/menu/{coffee_link}")
+    
+    # 페이지가 완전히 로드될 때까지 대기
+    WebDriverWait(browser, 20).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "menu_view_wrap"))
+    )
+    
+    # 상세 페이지의 소스를 변수에 저장
+    detail_page_source = browser.page_source
+    detail_soup = BeautifulSoup(detail_page_source, 'html.parser')
+    
+    title = detail_soup.select_one(".menu_view_wrap > .menu_info > h3").text.strip()  
+    titleE = detail_soup.select_one(".menu_view_wrap > .menu_info > .name_eng").text.strip()  
+    image_url = detail_soup.select_one(".menu_view_wrap > .menu_image > img.img").get('src').replace('/uploads', 'https://www.coffine.co.kr/uploads')
+    desction = detail_soup.select_one(".menu_view_wrap > .menu_info > .txt").text.strip() 
+    
     coffee_data.append({
+        "brand": "커핀그루나루",
         "title": title,
+        "titleE": titleE,
         "imageURL": image_url,
+        "desction": desction,
+        "address": "https://www.coffine.co.kr/"
     })
 
 # 데이터를 JSON 파일로 저장
