@@ -59,7 +59,7 @@ for track in tracks:
         "titleE": titleE,
         "desction": desction,
         "information": nutrition_info,
-        "address": "https://www.coffine.co.kr/"
+        "address": "https://paikdabang.com/"
     })
 
 # 데이터를 JSON 파일로 저장
