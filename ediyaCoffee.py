@@ -28,7 +28,7 @@ options.add_argument("--headless")
 browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
 
 # 페이지 로드
-browser.get('https://www.ediya.com/contents/drink.html?chked_val=12,13,14,15,16,71,83,132,&skeyword=#blockcate')
+browser.get('https://www.ediya.com/contents/drink.html?chked_val=12,&skeyword=#blockcate')
 
 # '더보기' 버튼이 나타날 때까지 기다림 (최대 20초)
 while True:
@@ -49,15 +49,33 @@ html_source_updated = browser.page_source
 soup = BeautifulSoup(html_source_updated, 'html.parser')
 
 # 데이터 추출
-EDIYA_data = []
+coffee_data = []
+
+# 위 데이터 추출
 tracks = soup.select("#menu_ul li")
 for track in tracks:
     name = track.select_one(".menu_tt > a > span").text.strip()
     image_url = track.select_one("a > img").get('src').replace('/images', 'https://www.ediya.com/files')
+    titleE = track.select_one(".detail_con > h2 > span").text.strip()
+    desction = track.select_one(".detail_con > p").text.strip()
 
-    EDIYA_data.append({
+    nutrition_info = {}
+    tbody = track.select_one(".pro_nutri")
+    if tbody:
+        rows = tbody.find_all("dl")
+        for row in rows:
+            key = row.find("dt").text.strip()
+            value = row.find("dd").text.strip()
+            nutrition_info[key] = value
+
+    coffee_data.append({
         "title": name,
-        "imageURL": image_url
+        "imageURL": image_url,
+         "brand": "커핀그루나루",
+        "titleE": titleE,
+        "desction": desction,
+        "information": nutrition_info,
+        "address": "https://www.coffine.co.kr/"
     })
 
 # 데이터를 JSON 파일로 저장
