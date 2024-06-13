@@ -27,7 +27,7 @@ urls = [
 ]
 
 # 데이터 추출을 위한 빈 리스트 생성
-theventi_data = []
+compose_data = []
 
 for url in urls:
     # 페이지 로드
@@ -43,15 +43,38 @@ for url in urls:
     html_source_updated = browser.page_source
     soup = BeautifulSoup(html_source_updated, 'html.parser')
 
-    # 데이터 추출
-    tracks = soup.select(".itemBox")
-    for track in tracks:
-        name = track.select_one(".title").text.strip()  
-        image_url = track.select_one(".rthumbnailimg").get('src').replace('/files', 'https://composecoffee.com/files') 
+    
+    page_title = soup.head.title.text.strip() if soup.head.title else "No Title"
+    page_title = page_title.replace(" - MENU", "").strip()
 
-        theventi_data.append({
+   
+    canonical_link = soup.head.find('link', rel='canonical')
+    address = canonical_link['href'].strip() if canonical_link else "No Address"
+
+    # 데이터 추출
+    items = soup.select(".itemBox")
+    for item in items:
+        brand = page_title
+        name = item.select_one(".title").text.strip()
+        image_url = item.select_one(".rthumbnailimg").get('src').replace('/files', 'https://composecoffee.com/files')
+
+        # 영양성분 정보 추출
+        nutrition_info = {}
+        nutrition_items = item.select(".info.g-0 .extra")
+        for nutrition_item in nutrition_items:
+            text = nutrition_item.text.strip().replace("⚬ ", "")
+            if text:
+                key_value = text.split(" : ")
+                if len(key_value) == 2:
+                    key, value = key_value
+                    nutrition_info[key] = value
+
+        compose_data.append({
+            "brand": brand,
             "title": name,
-            "imageURL": image_url 
+            "imageURL": image_url,
+            "information": nutrition_info,
+            "address": address
         })
 
 # 데이터를 JSON 파일로 저장
