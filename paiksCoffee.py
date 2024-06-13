@@ -17,8 +17,8 @@ filename = f"{folder_path}/menupaiks_{current_date}.json"
 
 # 웹드라이브 설치
 options = ChromeOptions()
-options.add_argument("--headless")
-browser = webdriver.Chrome(options=options)
+service = ChromeService(executable_path=ChromeDriverManager().install())
+browser = webdriver.Chrome(service=service, options=options)
 browser.get("https://paikdabang.com/menu/menu_coffee/")
 
 # 페이지가 완전히 로드될 때까지 대기
@@ -35,11 +35,31 @@ coffee_data = []
 tracks = soup.select("#content-wrap > div.sub_section.menu_wrap > div > div.menu_list.clear > ul > li")
 
 for track in tracks:
-    title = track.select_one("li > p").text.strip()    
+    title = track.select_one("li > p").text.strip()
     image_url = track.select_one("li > div.thumb > img").get('src')
+    titleE = track.select_one("li > .hover > .menu_tit2.color-1").text.strip()
+    desction = track.select_one("li > .hover > .txt").text.strip()
+     
+
+    nutrition_info = {}
+    tbody = track.select_one(".ingredient_table")
+    if tbody:
+        rows = tbody.find_all("li")
+        for row in rows:
+            key_elem = row.select_one("div:nth-child(1)")
+            value_elem = row.select_one("div:nth-child(2)")
+            key = key_elem.text.strip() if key_elem else "Unknown"
+            value = value_elem.text.strip() if value_elem else "Unknown"
+            nutrition_info[key] = value
+
     coffee_data.append({
+        "brand": "빽다방",
         "title": title,
         "imageURL": image_url,
+        "titleE": titleE,
+        "desction": desction,
+        "information": nutrition_info,
+        "address": "https://www.coffine.co.kr/"
     })
 
 # 데이터를 JSON 파일로 저장
