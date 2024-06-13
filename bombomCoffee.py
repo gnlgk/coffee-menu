@@ -13,7 +13,8 @@ import json
 
 # 현재 날짜 가져오기
 current_date = datetime.now().strftime("%Y-%m-%d")
-filename = f"menu-bombom_{current_date}.json"
+folder_path = "bombom"
+filename = f"{folder_path}/menubombom_{current_date}.json"
 
 # 웹드라이브 설치
 options = ChromeOptions()
