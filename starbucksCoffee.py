@@ -41,7 +41,7 @@ product_cd_list = [
 detailed_coffee_data = []
 
 for product_cd in product_cd_list:
-    detail_url = f"https://www.starbucks.co.kr/menu/drink_view.do?product_cd={product_cd}"
+    detail_url = f"https://www.starbucks.co.kr:7643/menu/drink_view.do?product_cd={product_cd}"
     browser.get(detail_url)
     
     try:
