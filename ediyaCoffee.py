@@ -71,11 +71,11 @@ for track in tracks:
     coffee_data.append({
         "title": name,
         "imageURL": image_url,
-         "brand": "커핀그루나루",
+         "brand": "이디아",
         "titleE": titleE,
         "desction": desction,
         "information": nutrition_info,
-        "address": "https://www.coffine.co.kr/"
+        "address": "https://www.ediya.com/"
     })
 
 # 데이터를 JSON 파일로 저장
